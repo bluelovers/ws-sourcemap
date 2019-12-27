@@ -109,6 +109,14 @@ describe(relative(__filename), () =>
 				//assert.isOk(actual.value, util.inspect(actual));
 			});
 
+			it(`sourceContent`, () => {
+
+				let actual = ssm.smc.sourceContentFor(ssm.sourceFile);
+				let expected = ssm.source;
+
+				expect(actual).to.have.deep.include(expected);
+			});
+
 		});
 
 	});

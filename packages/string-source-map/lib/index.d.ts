@@ -2,7 +2,7 @@
 import { IGenerateStringSourceMapOptions } from './util';
 import MagicString, { SourceMap } from 'magic-string';
 import { Change as JSDiffChange, PatchOptions } from 'diff';
-import { SourceMapConsumer, SourceFindPosition, FindPosition, Position, MappedPosition, RawSourceMap } from 'source-map';
+import { SourceMapConsumer, SourceFindPosition, FindPosition, Position, MappedPosition, RawSourceMap, MappingItem } from 'source-map';
 import { ITSResolvable, ITSPartialWith, ITSValueOrArray } from 'ts-type';
 import Bluebird from 'bluebird';
 declare const SymHidden: unique symbol;
@@ -100,6 +100,9 @@ export declare class StringSourceMap {
         value: string;
     })[];
     createPatch(options?: IPatchOptions): string;
+    computeColumnSpans(): this;
+    eachMapping<C extends any = this>(callback: (this: C, mapping: MappingItem) => void, context?: C, order?: typeof SourceMapConsumer.GENERATED_ORDER | typeof SourceMapConsumer.ORIGINAL_ORDER): this;
+    static fromStringWithSourceMap<T extends StringSourceMap = StringSourceMap>(source: string | Buffer, sourceMapConsumer: SourceMapConsumer | string | RawSourceMap): T;
 }
 export interface IPatchOptions {
     oldHeader?: string;

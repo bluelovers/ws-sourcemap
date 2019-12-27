@@ -155,9 +155,11 @@ export function diffMagicStringCore<O extends IDiffStringOptions>(opts1: IDiffSt
 	let i = 0;
 	let row: JSDiffChange;
 
+	/*
 	outputJSONSync(path.join(rootDir, 'test/temp', 'diff.json'), diff, {
 		spaces: 2,
 	});
+	 */
 
 	while (row = diff[i])
 	{
@@ -369,3 +371,4 @@ export function getLineColumn<T extends Position>(lines: string[] | string,
 		})[])
 		;
 }
+

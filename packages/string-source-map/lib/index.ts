@@ -12,7 +12,7 @@ import {
 	FindPosition,
 	Position,
 	MappedPosition,
-	RawSourceMap,
+	RawSourceMap, MappingItem,
 } from 'source-map';
 import createSourceMapConsumerSync from './sync';
 import { ITSResolvable, ITSPartialWith, ITSPropertyKey, ITSValueOrArray } from 'ts-type';
@@ -372,6 +372,43 @@ export class StringSourceMap
 	createPatch(options: IPatchOptions = {})
 	{
 		return createTwoFilesPatch(this.sourceFile, this.targetFile, this.source as string, this.target as string, options.oldHeader, options.newHeader, options.patchOptions)
+	}
+
+	computeColumnSpans()
+	{
+		this.smc.computeColumnSpans();
+		return this;
+	}
+
+	eachMapping<C extends any = this>(callback: (this: C, mapping: MappingItem) => void, context?: C, order?: typeof SourceMapConsumer.GENERATED_ORDER | typeof SourceMapConsumer.ORIGINAL_ORDER)
+	{
+		if (typeof context === 'undefined')
+		{
+			// @ts-ignore
+			context = this;
+		}
+
+		this.smc.eachMapping(callback, context, order);
+
+		return this;
+	}
+
+	static fromStringWithSourceMap<T extends StringSourceMap = StringSourceMap>(source: string | Buffer, sourceMapConsumer: SourceMapConsumer | string | RawSourceMap)
+	{
+		source = source.toString();
+
+		let self = this;
+
+		if (!(self instanceof StringSourceMap))
+		{
+			self = StringSourceMap
+		}
+
+		let ssm = new self({
+			source,
+		});
+
+		return ssm as any as T;
 	}
 
 }
