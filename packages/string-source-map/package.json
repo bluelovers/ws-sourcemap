@@ -1,0 +1,42 @@
+{
+  "name": "string-source-map",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "npx nyc yarn run test",
+    "lint": "npx eslint **/*.ts",
+    "ncu": "npx yarn-tool ncu -u",
+    "npm:publish": "npm publish",
+    "postpublish_": "git commit -m \"publish new version\" .",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "sort-package-json": "npx sort-package-json ./package.json",
+    "tsc:default": "tsc -p tsconfig.json",
+    "test": "npx mocha --require ts-node/register test/**/*.{test,spec}.{ts,tsx}",
+    "tsc:esm": "tsc -p tsconfig.esm.json"
+  },
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "crlf-normalize": "^1.0.3",
+    "diff": "^4.0.1",
+    "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15",
+    "magic-string": "^0.25.4",
+    "regexp-cjk": "^3.3.8",
+    "regexp-cjk-plugin-escape-unicode-property": "^1.0.1",
+    "regexp-cjk-plugin-extra": "^1.0.5",
+    "regexp-class-to-regenerate": "^1.0.2",
+    "source-map": "< 0.7",
+    "ts-type": "^1.2.9",
+    "uni-string": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.29",
+    "@types/diff": "^4.0.2",
+    "@types/fs-extra": "^8.0.1",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^13.1.0"
+  }
+}
