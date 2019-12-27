@@ -119,16 +119,6 @@ export class StringSourceMap
 		this[SymHidden].target = handleInputString(value, this[SymHidden].options);
 	}
 
-	get original()
-	{
-		return this.source as string
-	}
-
-	get generated()
-	{
-		return this.target as string
-	}
-
 	get sourcemap()
 	{
 		if (this[SymHidden].sourcemap == null && this.locked)
@@ -154,6 +144,9 @@ export class StringSourceMap
 		return this[SymHidden].smc
 	}
 
+	/**
+	 * 來源檔案名稱
+	 */
 	get sourceFile()
 	{
 		if (this[SymHidden].options.sourceFile == null)
@@ -170,6 +163,9 @@ export class StringSourceMap
 		this[SymHidden].options.sourceFile = value.toString()
 	}
 
+	/**
+	 * 目標檔案名稱
+	 */
 	get targetFile()
 	{
 		if (this[SymHidden].options.targetFile == null)
@@ -215,6 +211,9 @@ export class StringSourceMap
 		return this.process(options, ...argv);
 	}
 
+	/**
+	 * 試圖主動釋放記憶體
+	 */
 	destroy()
 	{
 		this._reset();
@@ -247,9 +246,9 @@ export class StringSourceMap
 	/**
 	 * 從 target 的行列位置來反查在 source 內的原始位置
 	 */
-	originalPositionFor(...argv: Parameters<SourceMapConsumer["originalPositionFor"]>)
+	originalPositionFor(generatedPosition: FindPosition)
 	{
-		return this.smc.originalPositionFor(...argv)
+		return this.smc.originalPositionFor(generatedPosition)
 	}
 
 	/**
@@ -301,16 +300,45 @@ export class StringSourceMap
 		return this.sourcemap.toString()
 	}
 
-	toUrl()
+	/**
+	 * sourcemap 的 base64 url
+	 * @returns {string}
+	 */
+	toUrl(includeComment?: boolean)
 	{
-		return this.sourcemap.toUrl()
+		let url = this.sourcemap.toUrl();
+
+		if (includeComment)
+		{
+			url = '//# sourceMappingURL=' + url;
+		}
+
+		return url
 	}
 
-	originalLineFor(...argv: Parameters<StringSourceMap["originalPositionFor"]>)
+	/**
+	 * 以新內容的位置資訊來查詢原始位置與文字內容
+	 */
+	originalLineFor(generatedPosition: ITSValueOrArray<FindPosition>)
 	{
-		let pos = this.originalPositionFor(...argv);
+		if (!Array.isArray(generatedPosition))
+		{
+			generatedPosition = [generatedPosition]
+		}
+
+		let pos = generatedPosition.map(pos => this.originalPositionFor(pos));
 
 		return this.originalLines(pos);
+	}
+
+	/**
+	 * 以原始內容的位置資訊來查詢新位置與文字內容
+	 */
+	generatedLineFor(...argv: Parameters<StringSourceMap["generatedPositionFor"]>)
+	{
+		let pos = this.generatedPositionFor(...argv);
+
+		return this.generatedLines(pos);
 	}
 
 	protected _splitLines(key: 'source' | 'target')
@@ -325,11 +353,17 @@ export class StringSourceMap
 		return this[SymHidden][key_cache]
 	}
 
+	/**
+	 * 取得原始字串中的 行列 所在文字內容
+	 */
 	originalLines<T extends Position>(position: ITSValueOrArray<ITSPartialWith<T, 'column'>>)
 	{
 		return getLineColumn(this._splitLines('source'), position)
 	}
 
+	/**
+	 * 取得新字串中的 行列 所在文字內容
+	 */
 	generatedLines<T extends Position>(position: ITSValueOrArray<ITSPartialWith<T, 'column'>>)
 	{
 		return getLineColumn(this._splitLines('target'), position)
@@ -337,7 +371,7 @@ export class StringSourceMap
 
 	createPatch(options: IPatchOptions = {})
 	{
-		return createTwoFilesPatch(this.sourceFile, this.targetFile, this.original, this.generated, options.oldHeader, options.newHeader, options.patchOptions)
+		return createTwoFilesPatch(this.sourceFile, this.targetFile, this.source as string, this.target as string, options.oldHeader, options.newHeader, options.patchOptions)
 	}
 
 }
@@ -380,3 +414,5 @@ function CheckLockedMethod<T extends any>(target: any, prop: ITSPropertyKey, des
 
 	return descriptor
 }
+
+export default StringSourceMap

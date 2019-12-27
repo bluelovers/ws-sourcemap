@@ -5,6 +5,5 @@ import { Diff, BaseOptions } from 'diff';
 export declare class DiffNovel extends Diff {
     tokenize(value: string): string[];
 }
-export declare const novelDiff: DiffNovel;
 export declare function diffNovelChars(oldStr: string, newStr: string, options?: BaseOptions): import("diff").Change[];
 export default diffNovelChars;

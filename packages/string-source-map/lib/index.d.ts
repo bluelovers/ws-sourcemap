@@ -2,7 +2,7 @@
 import { IGenerateStringSourceMapOptions } from './util';
 import MagicString, { SourceMap } from 'magic-string';
 import { Change as JSDiffChange, PatchOptions } from 'diff';
-import { SourceMapConsumer, SourceFindPosition, Position, MappedPosition, RawSourceMap } from 'source-map';
+import { SourceMapConsumer, SourceFindPosition, FindPosition, Position, MappedPosition, RawSourceMap } from 'source-map';
 import { ITSResolvable, ITSPartialWith, ITSValueOrArray } from 'ts-type';
 import Bluebird from 'bluebird';
 declare const SymHidden: unique symbol;
@@ -31,8 +31,6 @@ export declare class StringSourceMap {
     get locked(): boolean;
     get target(): string | Buffer;
     set target(value: string | Buffer);
-    get original(): string;
-    get generated(): string;
     get sourcemap(): SourceMap;
     /**
      * SourceMapConsumer
@@ -40,8 +38,14 @@ export declare class StringSourceMap {
      * @returns {SourceMapConsumer}
      */
     get smc(): SourceMapConsumer;
+    /**
+     * 來源檔案名稱
+     */
     get sourceFile(): string;
     set sourceFile(value: string);
+    /**
+     * 目標檔案名稱
+     */
     get targetFile(): string;
     set targetFile(value: string);
     /**
@@ -49,12 +53,15 @@ export declare class StringSourceMap {
      */
     process(options?: IStringSourceMapOptions, ...argv: any[]): this;
     processForce(options?: IStringSourceMapOptions, ...argv: any[]): this;
+    /**
+     * 試圖主動釋放記憶體
+     */
     destroy(): this;
     fakeThen<R extends any>(cb: (this: this, obj: this) => ITSResolvable<R>): Bluebird<R>;
     /**
      * 從 target 的行列位置來反查在 source 內的原始位置
      */
-    originalPositionFor(...argv: Parameters<SourceMapConsumer["originalPositionFor"]>): MappedPosition;
+    originalPositionFor(generatedPosition: FindPosition): MappedPosition;
     /**
      * 從 source 內的原始位置來查詢在 target 的行列位置
      */
@@ -62,14 +69,33 @@ export declare class StringSourceMap {
     allGeneratedPositionsFor(originalPosition: ITSPartialWith<MappedPosition, 'source'>): Position[];
     toJSON(): RawSourceMap;
     toString(): string;
-    toUrl(): string;
-    originalLineFor(...argv: Parameters<StringSourceMap["originalPositionFor"]>): (Pick<Position, "line"> & import("ts-type").ITSPartialPick<Position, "column"> & {
+    /**
+     * sourcemap 的 base64 url
+     * @returns {string}
+     */
+    toUrl(includeComment?: boolean): string;
+    /**
+     * 以新內容的位置資訊來查詢原始位置與文字內容
+     */
+    originalLineFor(generatedPosition: ITSValueOrArray<FindPosition>): (Pick<Position, "line"> & import("ts-type").ITSPartialPick<Position, "column"> & {
+        value: string;
+    })[];
+    /**
+     * 以原始內容的位置資訊來查詢新位置與文字內容
+     */
+    generatedLineFor(...argv: Parameters<StringSourceMap["generatedPositionFor"]>): (Pick<Position, "line"> & import("ts-type").ITSPartialPick<Position, "column"> & {
         value: string;
     })[];
     protected _splitLines(key: 'source' | 'target'): any;
+    /**
+     * 取得原始字串中的 行列 所在文字內容
+     */
     originalLines<T extends Position>(position: ITSValueOrArray<ITSPartialWith<T, 'column'>>): (Pick<T, Exclude<keyof T, "column">> & import("ts-type").ITSPartialPick<T, "column"> & {
         value: string;
     })[];
+    /**
+     * 取得新字串中的 行列 所在文字內容
+     */
     generatedLines<T extends Position>(position: ITSValueOrArray<ITSPartialWith<T, 'column'>>): (Pick<T, Exclude<keyof T, "column">> & import("ts-type").ITSPartialPick<T, "column"> & {
         value: string;
     })[];
@@ -80,4 +106,4 @@ export interface IPatchOptions {
     newHeader?: string;
     patchOptions?: PatchOptions;
 }
-export {};
+export default StringSourceMap;

@@ -172,7 +172,7 @@ export function diffMagicStringCore<O extends IDiffStringOptions>(opts1: IDiffSt
 
 		let throwError = true;
 
-		if (1)
+		if (0)
 		{
 			console.dir({
 				i_now,
