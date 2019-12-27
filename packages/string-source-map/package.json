@@ -1,6 +1,6 @@
 {
   "name": "string-source-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "create sourcemap form give two string",
   "license": "ISC",
   "author": "",
