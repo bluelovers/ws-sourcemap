@@ -1,6 +1,8 @@
 /**
  * @deprecated
  */
+import { RE_SOURCE_MAP_COMMENT_01, RE_SOURCE_MAP_COMMENT_02 } from './const';
+
 enum EnumExtractSourceMapType
 {
 	JS = 0x0001,
@@ -12,16 +14,13 @@ export function extractSourceMapFromTargetAllCore(value: string)
 	let lastMatchs: RegExpExecArray[] = [];
 
 	[
-		/(?:\/\/[@#][\s]*sourceMappingURL=([^\s'"]+)[\s]*$)/mg,
-		/(?:\/\*[@#][\s]*sourceMappingURL=([^\s*'"]+)[\s]*(?:\*\/)[\s]*$)/mg,
+		new RegExp(RE_SOURCE_MAP_COMMENT_01.source, RE_SOURCE_MAP_COMMENT_01.flags),
+		new RegExp(RE_SOURCE_MAP_COMMENT_02.source, RE_SOURCE_MAP_COMMENT_02.flags),
 	].some(re =>
 	{
-
 		if (re)
 		{
 			let match: RegExpExecArray;
-
-			re.lastIndex = 0;
 
 			while (match = re.exec(value as string))
 			{
