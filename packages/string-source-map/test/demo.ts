@@ -5,7 +5,7 @@ import { readFileSync } from 'fs-extra';
 import diffNovelChars from '../lib/diff/novel';
 import { SourceMapConsumer, SourceMapGenerator } from 'source-map';
 import { existsSync, writeFileSync } from 'fs-extra';
-import { parseComment } from 'extract-source-map';
+import { parseComment } from 'get-source-map-comment';
 import { SourceMap } from 'magic-string';
 import { LazySourceMap } from 'lazy-source-map';
 

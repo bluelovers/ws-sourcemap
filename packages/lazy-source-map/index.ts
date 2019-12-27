@@ -1,5 +1,5 @@
 import { IRawSourceMapJSON, IRawSourceMapJSONRuntime, ILazySourceMapInput } from './types';
-import { parseComment, EnumSourceMapCommentType } from 'extract-source-map';
+import { parseComment, EnumSourceMapCommentType } from 'get-source-map-comment';
 import { _toRawSourceMapJSON } from './util';
 
 export { ILazySourceMapInput, IRawSourceMapJSON, IRawSourceMapJSONRuntime }

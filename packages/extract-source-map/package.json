@@ -1,5 +1,5 @@
 {
-  "name": "extract-source-map",
+  "name": "get-source-map-comment",
   "version": "1.0.1",
   "description": "extract source-map info from comment",
   "homepage": "https://github.com/bluelovers/ws-sourcemap#readme",
@@ -24,5 +24,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
-  }
+  },
+  "gitHead": "3ffd4d895e63f25cbcea0c1ef43302e5b8420d80"
 }
