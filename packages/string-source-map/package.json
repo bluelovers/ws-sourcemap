@@ -2,9 +2,21 @@
   "name": "string-source-map",
   "version": "1.0.1",
   "description": "create sourcemap form give two string",
+  "homepage": "https://github.com/bluelovers/ws-sourcemap#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-sourcemap/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-sourcemap.git"
+  },
   "license": "ISC",
   "author": "",
   "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
@@ -12,6 +24,7 @@
     "npm:publish": "npm publish",
     "postpublish_": "git commit -m \"publish new version\" .",
     "prepublishOnly": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
     "sort-package-json": "npx sort-package-json ./package.json",
     "test": "npx mocha --require ts-node/register test/**/*.{test,spec}.{ts,tsx}",
     "tsc:default": "tsc -p tsconfig.json",
