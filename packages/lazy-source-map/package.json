@@ -1,0 +1,33 @@
+{
+  "name": "lazy-source-map",
+  "version": "1.0.0",
+  "description": "convert input source-map like data to source-map",
+  "homepage": "https://github.com/bluelovers/ws-sourcemap#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-sourcemap/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-sourcemap.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "npx nyc yarn run test",
+    "lint": "npx eslint **/*.ts",
+    "ncu": "npx yarn-tool ncu -u",
+    "npm:publish": "npm publish",
+    "postpublish_": "git commit -m \"publish new version\" .",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "sort-package-json": "npx sort-package-json ./package.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc:default": "tsc -p tsconfig.json",
+    "tsc:esm": "tsc -p tsconfig.esm.json"
+  },
+  "dependencies": {
+    "extract-source-map": "^1.0.0",
+    "source-map": "< 0.7",
+    "ts-type": "^1.2.12"
+  }
+}
