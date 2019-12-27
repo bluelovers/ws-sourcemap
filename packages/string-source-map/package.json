@@ -1,6 +1,6 @@
 {
   "name": "string-source-map",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "create sourcemap form give two string",
   "homepage": "https://github.com/bluelovers/ws-sourcemap#readme",
   "bugs": {
@@ -35,8 +35,8 @@
     "convert-source-map": "^1.7.0",
     "crlf-normalize": "^1.0.3",
     "diff": "^4.0.1",
-    "extract-source-map": "^1.0.0",
-    "lazy-source-map": "^1.0.0",
+    "extract-source-map": "^1.0.1",
+    "lazy-source-map": "^1.0.1",
     "lodash": "^4.17.15",
     "magic-string": "^0.25.4",
     "source-map": "< 0.7",
