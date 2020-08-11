@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.stripSourceMapComment = exports.EnumSourceMapCommentType = exports.chkCommentType = exports.parseComment = exports.extractSourceMapFromTarget = void 0;
 const extract_1 = require("./extract");
-exports.extractSourceMapFromTarget = extract_1.extractSourceMapFromTarget;
+Object.defineProperty(exports, "extractSourceMapFromTarget", { enumerable: true, get: function () { return extract_1.extractSourceMapFromTarget; } });
 const parse_1 = require("./parse");
-exports.parseComment = parse_1.parseComment;
-exports.chkCommentType = parse_1.chkCommentType;
-exports.EnumSourceMapCommentType = parse_1.EnumSourceMapCommentType;
+Object.defineProperty(exports, "parseComment", { enumerable: true, get: function () { return parse_1.parseComment; } });
+Object.defineProperty(exports, "chkCommentType", { enumerable: true, get: function () { return parse_1.chkCommentType; } });
+Object.defineProperty(exports, "EnumSourceMapCommentType", { enumerable: true, get: function () { return parse_1.EnumSourceMapCommentType; } });
 const strip_1 = require("./strip");
-exports.stripSourceMapComment = strip_1.stripSourceMapComment;
+Object.defineProperty(exports, "stripSourceMapComment", { enumerable: true, get: function () { return strip_1.stripSourceMapComment; } });
 exports.default = extract_1.extractSourceMapFromTarget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUF1RDtBQUk5QyxxQ0FKQSxvQ0FBMEIsQ0FJQTtBQUhuQyxtQ0FBaUY7QUFLeEUsdUJBTEEsb0JBQVksQ0FLQTtBQUFFLHlCQUxBLHNCQUFjLENBS0E7QUFBRSxtQ0FMQSxnQ0FBd0IsQ0FLQTtBQUovRCxtQ0FBZ0Q7QUFNdkMsZ0NBTkEsNkJBQXFCLENBTUE7QUFFOUIsa0JBQWUsb0NBQTBCLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBleHRyYWN0U291cmNlTWFwRnJvbVRhcmdldCB9IGZyb20gJy4vZXh0cmFjdCc7XG5pbXBvcnQgeyBwYXJzZUNvbW1lbnQsIGNoa0NvbW1lbnRUeXBlLCBFbnVtU291cmNlTWFwQ29tbWVudFR5cGUgfSBmcm9tICcuL3BhcnNlJztcbmltcG9ydCB7IHN0cmlwU291cmNlTWFwQ29tbWVudCB9IGZyb20gJy4vc3RyaXAnO1xuXG5leHBvcnQgeyBleHRyYWN0U291cmNlTWFwRnJvbVRhcmdldCB9XG5cbmV4cG9ydCB7IHBhcnNlQ29tbWVudCwgY2hrQ29tbWVudFR5cGUsIEVudW1Tb3VyY2VNYXBDb21tZW50VHlwZSB9XG5cbmV4cG9ydCB7IHN0cmlwU291cmNlTWFwQ29tbWVudCB9XG5cbmV4cG9ydCBkZWZhdWx0IGV4dHJhY3RTb3VyY2VNYXBGcm9tVGFyZ2V0XG5cbiJdfQ==
+//# sourceMappingURL=index.js.map
