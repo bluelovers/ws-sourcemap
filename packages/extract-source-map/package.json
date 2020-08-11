@@ -1,6 +1,6 @@
 {
   "name": "get-source-map-comment",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "extract source-map info from comment",
   "homepage": "https://github.com/bluelovers/ws-sourcemap#readme",
   "bugs": {

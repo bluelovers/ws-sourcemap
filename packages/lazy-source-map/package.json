@@ -1,6 +1,6 @@
 {
   "name": "lazy-source-map",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "convert input source-map like data to source-map",
   "homepage": "https://github.com/bluelovers/ws-sourcemap#readme",
   "bugs": {
@@ -27,7 +27,7 @@
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
   "dependencies": {
-    "get-source-map-comment": "^1.0.2",
+    "get-source-map-comment": "^1.0.3",
     "source-map": "< 0.7",
     "ts-type": "^1.2.32"
   },
