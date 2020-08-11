@@ -16,19 +16,20 @@
   "scripts": {
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
-    "ncu": "npx yarn-tool ncu -u",
+    "test": "echo \"Error: no test specified\"",
     "npm:publish": "npm publish",
-    "postpublish_": "git commit -m \"publish new version\" .",
+    "preversion": "yarn run test",
     "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "postpublish_": "git commit -m \"publish new version\" .",
+    "ncu": "npx yarn-tool ncu -u",
     "sort-package-json": "npx sort-package-json ./package.json",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:default": "tsc -p tsconfig.json",
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
   "dependencies": {
     "get-source-map-comment": "^1.0.2",
     "source-map": "< 0.7",
-    "ts-type": "^1.2.12"
+    "ts-type": "^1.2.32"
   },
   "gitHead": "3ffd4d895e63f25cbcea0c1ef43302e5b8420d80"
 }
